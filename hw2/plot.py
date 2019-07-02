@@ -1,6 +1,7 @@
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import json
 import os
 
@@ -55,6 +56,7 @@ def plot_data(data, value="AverageReturn"):
     sns.tsplot(data=data, time="Iteration", value=value, unit="Unit", condition="Condition")
     plt.legend(loc='best').draggable()
     plt.show()
+    plt.savefig('result.png')
 
 
 def get_datasets(fpath, condition=None):

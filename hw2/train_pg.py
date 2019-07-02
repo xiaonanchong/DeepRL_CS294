@@ -234,7 +234,7 @@ def train_PG(
     update_op = tf.train.AdamOptimizer(learning_rate).minimize(loss) 
     
     '''
-   #========================================================================================#
+    #========================================================================================#
     #                           ----------SECTION 5----------
     # Optional Baseline
     #========================================================================================#
@@ -295,7 +295,7 @@ def train_PG(
         print("average_rewards : ", average_returns)
         print("\n")
 
-        if average_returns > env.spec.reward_threshold:
+        if average_returns > 0:#env.spec.reward_threshold:
             print("task solved")
 
         #====================================================================================#
@@ -450,7 +450,10 @@ def train_PG(
         loss.backward()
         optimizer.step()
 
-        
+        ####################### cxn ####################
+        if itr == n_iter-1:
+            torch.save(mlp, logdir)
+        ####################### cxn ####################
 
         # Log diagnostics
         returns = [path["reward"].sum() for path in paths]
